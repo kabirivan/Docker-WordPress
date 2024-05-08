@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  wikiri_db1:
-    container_name: wikiri_db1
-    image: mysql:5.7
+  db:
+    container_name: db
+    image: mysql:latest
     volumes:
       - ./db_data1:/var/lib/mysql
     restart: always
@@ -12,7 +12,6 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-    platform: linux/x86_64
 
   wikiri_wordpress1:
     container_name: wikiri_wordpress1
@@ -21,7 +20,7 @@ services:
     volumes:
       - ./wordpress1:/var/www/html
     environment:
-      WORDPRESS_DB_HOST: wikiri_db1
+      WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
     ports:
